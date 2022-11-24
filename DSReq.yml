@@ -2,36 +2,36 @@ name: WHATEVERNAMEYOUWANT
 channels:
   - defaults
 dependencies:
-  - matplotlib=3.5.1
+  - matplotlib=3.3.4
   - numpy=1.20.1
   - pandas=1.1.4
-  - pillow=9.0.1
-  - pip=21.2.2
+  - pillow=8.2.0
+  - pip=21.0.1
   - plotly=5.11.0
   - pyqt=5.15.7
   - python=3.8.8
-  - python-dateutil=2.8.2
+  - python-dateutil=2.8.1
   - pytz=2021.3
   - sqlite=3.38.3
-  - wheel=0.37.1
+  - wheel=0.36.2
   - statsmodels
-  - statsmodels==0.13.2
-  - streamlit=1.11.0
+  - statsmodels==0.12.2
+  - streamlit=1.15.1
   - seaborn==0.11.1
   - scikit-learn==0.24.1
   - pip:
     - aiohttp==3.7.4.post0
     - async-timeout==3.0.1
-    - attrs==21.4.0
+    - attrs==20.3.0
     - colorama==0.4.4
     - convertdate==2.4.0
-    - cython==0.29.30
+    - cython==0.29.23
     - discord==1.7.3
     - discord-py==1.7.3
-    - docutils==0.18.1
-    - multidict==6.0.2
+    - docutils==0.16
+    - multidict==5.2.0
     - python-dotenv==0.20.0
-    - scipy==1.8.1
+    - scipy==1.6.2
     - setuptools-git==1.2
     - statistics==1.0.3.5
     - tqdm==4.64.0
