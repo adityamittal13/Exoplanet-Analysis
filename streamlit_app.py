@@ -8,7 +8,8 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.cluster import KMeans
 from sklearn.preprocessing import StandardScaler
-from sklearn.decomposition import PCA 
+from sklearn.decomposition import PCA
+from PIL import Image
 import collections
 
 #TODO: reading in the dataset
@@ -54,22 +55,28 @@ st.markdown("""---""")
 st.header('Regression Analysis')
 col1, col2, col3 = st.columns(3)
 
-sns.lmplot(x='st_logg',y='pl_orbper',data=scat_df, fit_reg=True, line_kws={'color': 'red'})
-mpl_fig = plt.gcf()
-plotly_fig = plotly.tools.mpl_to_plotly(mpl_fig)
-col1.plotly_chart(mpl_fig)
+# sns.lmplot(x='st_logg',y='pl_orbper',data=scat_df, fit_reg=True, line_kws={'color': 'red'})
+# mpl_fig = plt.gcf()
+# plotly_fig = plotly.tools.mpl_to_plotly(mpl_fig)
+# col1.plotly_chart(mpl_fig)
+image = Image.open("logg_orbper.png")
+col1.image(image)
 col1.markdown("As the stellar surface gravity increases, the orbital period decreases.")
 
-sns.lmplot(x='pl_orbeccen',y='pl_bmassj',data=scat_df, fit_reg=True, line_kws={'color': 'red'}) 
-mpl_fig = plt.gcf()
-plotly_fig = plotly.tools.mpl_to_plotly(mpl_fig)
-col2.plotly_chart(mpl_fig)
+# sns.lmplot(x='pl_orbeccen',y='pl_bmassj',data=scat_df, fit_reg=True, line_kws={'color': 'red'}) 
+# mpl_fig = plt.gcf()
+# plotly_fig = plotly.tools.mpl_to_plotly(mpl_fig)
+# col2.plotly_chart(mpl_fig)
+image = Image.open("eccen_mass.png")
+col2.image(image)
 col2.markdown("As the planet's mass increases, the eccentricity of the orbit of the planet increases.")
 
-sns.lmplot(x='pl_orbper',y='st_mass',data=scat_df, fit_reg=True, line_kws={'color': 'red'}, ci=None, robust=True) 
-mpl_fig = plt.gcf()
-plotly_fig = plotly.tools.mpl_to_plotly(mpl_fig)
-col3.plotly_chart(mpl_fig)
+# sns.lmplot(x='pl_orbper',y='st_mass',data=scat_df, fit_reg=True, line_kws={'color': 'red'}, ci=None, robust=True) 
+# mpl_fig = plt.gcf()
+# plotly_fig = plotly.tools.mpl_to_plotly(mpl_fig)
+# col3.plotly_chart(mpl_fig)
+image = Image.open("orbper_mass.png")
+col3.image(image)
 col3.markdown("As the stellar mass increases, the orbital period increases.")
 st.markdown("""---""")
 
@@ -82,31 +89,35 @@ kmeans_df = kmeans_df.fillna(kmeans_df.mean())
 kmeans_df.dropna(axis=1, inplace=True)
 kmeans_np = kmeans_df.to_numpy()
 
-X = kmeans_np
-Sc = StandardScaler()
-X = Sc.fit_transform(kmeans_df)
-pca = PCA(2) 
-pca_data = pd.DataFrame(pca.fit_transform(X),columns=['PC1','PC2']) 
-kmeans = KMeans(n_clusters=6).fit(X)
-pca_data['cluster'] = pd.Categorical(kmeans.labels_)
-g = sns.scatterplot(x="PC1",y="PC2",hue="cluster",data=pca_data)
-g.legend_.remove()
+# X = kmeans_np
+# Sc = StandardScaler()
+# X = Sc.fit_transform(kmeans_df)
+# pca = PCA(2) 
+# pca_data = pd.DataFrame(pca.fit_transform(X),columns=['PC1','PC2']) 
+# kmeans = KMeans(n_clusters=6).fit(X)
+# pca_data['cluster'] = pd.Categorical(kmeans.labels_)
+# g = sns.scatterplot(x="PC1",y="PC2",hue="cluster",data=pca_data)
+# g.legend_.remove()
 
-mpl_fig = plt.gcf()
-plotly_fig = plotly.tools.mpl_to_plotly(mpl_fig)
-col1.plotly_chart(mpl_fig)
+# mpl_fig = plt.gcf()
+# plotly_fig = plotly.tools.mpl_to_plotly(mpl_fig)
+# col1.plotly_chart(mpl_fig)
+image = Image.open("pcaplot.png")
+col1.image(image)
 col1.markdown("This shows a k-means clustering on a PCA graph after mean-imputing the numerical columns.")
 
-counter = collections.Counter(list(kmeans.labels_))
-cd = dict(counter)
-D = collections.OrderedDict(sorted(cd.items()))
-plt.bar(range(len(D)), list(D.values()), align='center')
-plt.xticks(range(len(D)), list(D.keys()))
+# counter = collections.Counter(list(kmeans.labels_))
+# cd = dict(counter)
+# D = collections.OrderedDict(sorted(cd.items()))
+# plt.bar(range(len(D)), list(D.values()), align='center')
+# plt.xticks(range(len(D)), list(D.keys()))
 
-mpl_fig = plt.gcf()
-plotly_fig = plotly.tools.mpl_to_plotly(mpl_fig)
-col2.plotly_chart(mpl_fig)
-col2.markdown("This shows the distribution of samples across each of the 6 k-means clusters.")
+# mpl_fig = plt.gcf()
+# plotly_fig = plotly.tools.mpl_to_plotly(mpl_fig)
+# col2.plotly_chart(mpl_fig)
+image = Image.open("elbowcurve.png")
+col2.image(image)
+col2.markdown("This shows why 6 clusters was the optimal choice for the k-means algorithm.")
 st.markdown("""---""")
 
 # col1.plotly_chart(px.imshow ))
